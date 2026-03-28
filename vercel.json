@@ -1,0 +1,3 @@
+{
+  "rewrites": [{ "source": "/", "destination": "/Propunere_Heredo_Analiza.html" }]
+}

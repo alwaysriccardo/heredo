@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heredo — Analiză & Propunere Creativă</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
+
+  :root {
+    --gold: #C4A265;
+    --gold-light: #D4B87A;
+    --dark: #1A1A1A;
+    --darker: #0F0F0F;
+    --cream: #F5F0E8;
+    --cream-dark: #E8E0D0;
+    --burgundy: #6B1D2A;
+    --text: #2C2C2C;
+    --text-light: #666;
+    --accent-blue: #3A4F6F;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    color: var(--text);
+    background: #fff;
+    font-size: 10.5pt;
+    line-height: 1.65;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ======================== COVER PAGE ======================== */
+  .cover {
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(160deg, var(--darker) 0%, #1C1612 40%, #2A1F18 70%, var(--dark) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 80px;
+    page-break-after: always;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at 30% 50%, rgba(196,162,101,0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 30%, rgba(107,29,42,0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .cover-line { width: 60px; height: 1px; background: var(--gold); margin: 0 auto; }
+  .cover-line.thick { width: 80px; height: 2px; }
+
+  .cover-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 10pt;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 60px;
+    margin-bottom: 20px;
+  }
+
+  .cover-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 42pt;
+    color: var(--cream);
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+
+  .cover-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: 14pt;
+    color: var(--gold-light);
+    margin-bottom: 40px;
+  }
+
+  .cover-desc {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 9.5pt;
+    color: rgba(245,240,232,0.6);
+    max-width: 380px;
+    margin: 30px auto 0;
+    line-height: 1.7;
+    letter-spacing: 0.3px;
+  }
+
+  .cover-footer {
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 8pt;
+    color: rgba(245,240,232,0.35);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .cover-monogram {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 80pt;
+    color: var(--gold);
+    opacity: 0.15;
+    position: absolute;
+    top: 50px;
+    right: 80px;
+    line-height: 1;
+  }
+
+  /* ======================== CONTENT PAGES ======================== */
+  .page {
+    width: 100%;
+    min-height: 100vh;
+    padding: 55px 65px;
+    page-break-after: always;
+    position: relative;
+    background: #fff;
+  }
+
+  .page::after {
+    content: '';
+    position: absolute;
+    bottom: 30px;
+    left: 65px;
+    right: 65px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    opacity: 0.3;
+  }
+
+  .page-number {
+    position: absolute;
+    bottom: 35px;
+    right: 65px;
+    font-size: 8pt;
+    color: var(--text-light);
+    letter-spacing: 2px;
+  }
+
+  /* Section Headers */
+  .section-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 48pt;
+    color: var(--gold);
+    opacity: 0.25;
+    line-height: 1;
+    margin-bottom: -12px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 22pt;
+    color: var(--dark);
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+  }
+
+  .section-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 9pt;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 25px;
+  }
+
+  .divider {
+    width: 40px;
+    height: 2px;
+    background: var(--gold);
+    margin: 20px 0;
+  }
+
+  /* Text */
+  p { margin-bottom: 12px; }
+
+  .lead {
+    font-size: 11.5pt;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.75;
+    margin-bottom: 18px;
+  }
+
+  .quote {
+    border-left: 3px solid var(--gold);
+    padding: 15px 20px;
+    margin: 20px 0;
+    background: rgba(196,162,101,0.04);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13pt;
+    font-style: italic;
+    color: var(--burgundy);
+    line-height: 1.6;
+  }
+
+  .highlight-box {
+    background: linear-gradient(135deg, var(--cream) 0%, #F8F4EE 100%);
+    border: 1px solid var(--cream-dark);
+    border-radius: 4px;
+    padding: 18px 22px;
+    margin: 18px 0;
+  }
+
+  .highlight-box h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 11pt;
+    color: var(--burgundy);
+    margin-bottom: 8px;
+  }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    font-size: 9.5pt;
+  }
+
+  table th {
+    background: var(--dark);
+    color: var(--gold);
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+
+  table td {
+    padding: 9px 14px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+  }
+
+  table tr:nth-child(even) td {
+    background: #fafaf8;
+  }
+
+  /* Status indicators */
+  .status {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 8pt;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+  .status.green { background: #E8F5E9; color: #2E7D32; }
+  .status.red { background: #FFEBEE; color: #C62828; }
+  .status.orange { background: #FFF3E0; color: #E65100; }
+  .status.gold { background: rgba(196,162,101,0.15); color: #8B6914; }
+
+  /* Lists */
+  ul { margin: 10px 0 15px 18px; }
+  ul li { margin-bottom: 6px; padding-left: 4px; }
+  ul li::marker { color: var(--gold); }
+
+  .check-list { list-style: none; margin-left: 0; }
+  .check-list li { padding-left: 22px; position: relative; margin-bottom: 8px; }
+  .check-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  .x-list { list-style: none; margin-left: 0; }
+  .x-list li { padding-left: 22px; position: relative; margin-bottom: 8px; }
+  .x-list li::before {
+    content: '✗';
+    position: absolute;
+    left: 0;
+    color: #C62828;
+    font-weight: 700;
+  }
+
+  /* Two columns */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin: 15px 0;
+  }
+
+  .col-card {
+    background: #FAFAF8;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    padding: 18px 20px;
+  }
+
+  .col-card h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 12pt;
+    color: var(--dark);
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--cream-dark);
+  }
+
+  /* Service cards */
+  .service-card {
+    border: 1px solid var(--cream-dark);
+    border-radius: 6px;
+    padding: 22px 25px;
+    margin: 14px 0;
+    position: relative;
+    background: linear-gradient(135deg, #fff 0%, var(--cream) 100%);
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--gold);
+  }
+
+  .service-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 14pt;
+    color: var(--dark);
+    margin-bottom: 4px;
+  }
+
+  .service-card .service-tag {
+    font-size: 8pt;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+
+  .service-card p {
+    font-size: 9.5pt;
+    color: var(--text-light);
+    margin-bottom: 8px;
+  }
+
+  /* Screenshot images */
+  .screenshot {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin: 12px 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+
+  .screenshot-small {
+    width: 75%;
+    margin: 12px auto;
+    display: block;
+  }
+
+  .img-caption {
+    text-align: center;
+    font-size: 8pt;
+    color: var(--text-light);
+    font-style: italic;
+    margin-top: -6px;
+    margin-bottom: 15px;
+  }
+
+  /* Intro letter style */
+  .letter {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 40px 0;
+  }
+
+  .letter p {
+    font-size: 10.5pt;
+    line-height: 1.8;
+    margin-bottom: 14px;
+  }
+
+  .letter .signature {
+    margin-top: 30px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12pt;
+    color: var(--dark);
+  }
+
+  .letter .salut {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14pt;
+    color: var(--dark);
+    margin-bottom: 18px;
+  }
+
+  /* Priority badges */
+  .priority {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .priority.urgent { background: #C62828; }
+  .priority.high { background: #E65100; }
+  .priority.medium { background: var(--gold); }
+
+  h5 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 9.5pt;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text);
+    margin: 18px 0 8px;
+  }
+
+  .small-note {
+    font-size: 8pt;
+    color: var(--text-light);
+    font-style: italic;
+  }
+
+  .flow-steps {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin: 15px 0;
+  }
+
+  .flow-step {
+    text-align: center;
+    padding: 14px 10px;
+    background: var(--cream);
+    border-radius: 4px;
+    position: relative;
+  }
+
+  .flow-step .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 18pt;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .flow-step .step-label {
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text);
+    margin-top: 4px;
+  }
+
+  .flow-step::after {
+    content: '→';
+    position: absolute;
+    right: -14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gold);
+    font-size: 14pt;
+  }
+
+  .flow-step:last-child::after { content: ''; }
+</style>
+</head>
+<body>
+
+<!-- ============== COVER ============== -->
+<div class="cover">
+  <div class="cover-subtitle">Analiză de Brand & Propunere Creativă</div>
+  <div class="cover-line thick"></div>
+  <div class="cover-title" style="margin-top: 20px;">HEREDO</div>
+  <div class="cover-tagline">Gustul moștenirii care inspiră generații</div>
+  <div class="cover-line"></div>
+  <div class="cover-desc">
+    Un studiu complet al brandului Heredo — identitate vizuală, prezență digitală, context competitiv și direcție strategică pentru următoarea etapă de creștere.
+  </div>
+  <div class="cover-footer">Martie 2026 &nbsp;·&nbsp; Document Confidențial</div>
+</div>
+
+<!-- ============== PAGE 1: SCRISOARE ============== -->
+<div class="page">
+  <div class="letter">
+    <div class="salut">Stimată Cristina,</div>
+
+    <p>Mulțumesc pentru întâlnirea din 25 martie și pentru deschiderea cu care mi-ați prezentat povestea Heredo. Am plecat de la acea conversație cu un respect profund față de ceea ce construiți — nu doar un vin, ci o moștenire.</p>
+
+    <p>În zilele care au urmat, am făcut ceea ce știu eu cel mai bine: am analizat. Am studiat fiecare postare de pe Instagram și Facebook. Am cercetat piața vinului din Moldova, am comparat Heredo cu alte vinării din țară și din afară, am examinat prețurile, pozițiile în piață și percepția consumatorilor pe platforme internaționale precum Vivino.</p>
+
+    <p>Am folosit instrumente profesionale de analiză digitală — de la colectare de date de pe rețele sociale, până la cercetare de piață și analiză competitivă. Tot ce veți găsi în acest document este rezultatul acelei cercetări.</p>
+
+    <p>Scopul acestui document nu este să vă vând ceva. Este să vă arăt că am înțeles ce este Heredo, unde se află acum, unde poate ajunge — și cum pot contribui eu la acel drum.</p>
+
+    <p>Am structurat analiza în câteva secțiuni clare: situația actuală a brandului, auditul rețelelor sociale, contextul competitiv și, la final, ce pot oferi concret pentru a aduce Heredo la nivelul vizual pe care calitatea vinului dumneavoastră îl merită.</p>
+
+    <p style="margin-top: 30px;">Cu respect,</p>
+    <div class="signature">Riccardo</div>
+    <p class="small-note" style="margin-top: 30px;">Document confidențial — pregătit exclusiv pentru Cristina Olărescu / Heredo</p>
+  </div>
+  <div class="page-number">02</div>
+</div>
+
+<!-- ============== PAGE 2: CE ȘTIU DESPRE HEREDO ============== -->
+<div class="page">
+  <div class="section-num">01</div>
+  <div class="section-title">Ce știu despre Heredo</div>
+  <div class="section-subtitle">Sinteza informațiilor culese</div>
+  <div class="divider"></div>
+
+  <p class="lead">Înainte de a propune orice direcție creativă, am vrut să înțeleg Heredo în profunzime — nu doar ca brand, ci ca poveste, familie și ambție.</p>
+
+  <table>
+    <tr><th colspan="2">Identitate</th></tr>
+    <tr><td style="width:35%; font-weight:500;">Numele brandului</td><td>HEREDO — din latină, „moștenire"</td></tr>
+    <tr><td style="font-weight:500;">Fondatoare</td><td>Cristina Olărescu — întoarsă din Irlanda pentru a continua via părinților</td></tr>
+    <tr><td style="font-weight:500;">Locație</td><td>Gura Galbenei, raionul Cimișlia, Republica Moldova</td></tr>
+    <tr><td style="font-weight:500;">Suprafață</td><td>~30 hectare de viță de vie</td></tr>
+    <tr><td style="font-weight:500;">Echipament</td><td>Importat din Italia — fermentare, păstrare, îmbuteliere</td></tr>
+    <tr><td style="font-weight:500;">Prima producție</td><td>2021 — medaliată de la prima participare</td></tr>
+    <tr><td style="font-weight:500;">Membru</td><td>Asociația Micilor Producători de Vinuri din Moldova</td></tr>
+  </table>
+
+  <div class="two-col" style="margin-top: 20px;">
+    <div class="col-card">
+      <h4>🍷 Portofoliul actual</h4>
+      <ul>
+        <li><strong>Cabernet Sauvignon</strong> — roșu sec</li>
+        <li><strong>Viorica</strong> — alb sec (soi autohton)</li>
+        <li><strong>Chardonnay</strong> — alb sec</li>
+        <li><strong>Merlot Rosé</strong> — roze sec</li>
+      </ul>
+      <p class="small-note">+ 4 vinuri noi în lansare (următoarele săptămâni)</p>
+    </div>
+    <div class="col-card">
+      <h4>🌍 Prezență internațională</h4>
+      <ul>
+        <li><strong>România</strong> — parteneriat cu consulul onorific din Oradea</li>
+        <li><strong>Marea Britanie</strong> — în curs de dezvoltare</li>
+        <li><strong>Nigeria</strong> — explorare piață</li>
+        <li><strong>Moldova</strong> — magazine de specialitate, localuri</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="quote">
+    „Heredo nu este doar un produs — este tot ce am primit de la părinți și tot ce vreau să las copiilor mei."
+    <br><span style="font-style: normal; font-size: 9pt; color: var(--text-light);">— Cristina Olărescu, din conversația noastră</span>
+  </div>
+
+  <div class="highlight-box">
+    <h4>📍 Context important</h4>
+    <p style="margin-bottom:0;">Heredo este prezentă pe Vivino (platforma internațională de rating al vinurilor) cu un scor de <strong>3.9 din 5</strong>, dar cu foarte puține recenzii — ceea ce indică un potențial enorm nevalorificat pe plan internațional.</p>
+  </div>
+
+  <div class="page-number">03</div>
+</div>
+
+<!-- ============== PAGE 3: ANALIZA BRANDULUI ============== -->
+<div class="page">
+  <div class="section-num">02</div>
+  <div class="section-title">Analiza brandului actual</div>
+  <div class="section-subtitle">Ce funcționează și ce necesită atenție</div>
+  <div class="divider"></div>
+
+  <p class="lead">Heredo are fundamente solide: un nume memorabil, o poveste autentică și un produs de calitate. Dar identitatea vizuală și prezența digitală nu reflectă încă nivelul real al brandului.</p>
+
+  <h5>Identitatea vizuală</h5>
+
+  <p>Logo-ul Heredo — monograma „H" în auriu pe fond închis — comunică eleganță și exclusivitate. Este inspirat de stilul caselor de modă de lux (similar cu monogramele Chanel sau Louis Vuitton). Etichetele folosesc hârtie de calitate superioară, tipografie serif clasică și un design minimalist.</p>
+
+  <p>Paleta cromatică <strong>(negru, auriu, crem, burgund)</strong> este corectă pentru segmentul premium. Fotografia de produs este atmosferică — lumini calde, fundal bokeh, compoziții elegante.</p>
+
+  <div class="two-col">
+    <div class="col-card">
+      <h4 style="color: #2E7D32;">✓ Puncte forte</h4>
+      <ul class="check-list">
+        <li>Numele „Heredo" — scurt, universal, plin de semnificație</li>
+        <li>Sloganul — „Gustul moștenirii care inspiră generații" este puternic</li>
+        <li>Fotografia de produs — profesionistă și consistentă</li>
+        <li>Povestea autentică — nu fabricată, ci trăită</li>
+        <li>Monograma logo — elegantă, sugerează lux</li>
+        <li>Calitatea fizică — hârtie premium, echipament italian</li>
+        <li>Medaliată din primul an de producție</li>
+        <li>Highlight-urile de Instagram bine organizate</li>
+      </ul>
+    </div>
+    <div class="col-card">
+      <h4 style="color: #C62828;">✗ Puncte de îmbunătățit</h4>
+      <ul class="x-list">
+        <li><strong>Nu există website</strong> — singura vinărie boutique serioasă din Moldova fără</li>
+        <li>Conținut video aproape inexistent</li>
+        <li>Email generic (Gmail) — nu @heredo.md</li>
+        <li>Fără pagină Google Maps — vinăria este invizibilă pentru turiști</li>
+        <li>Facebook slab dezvoltat (575 urmăritori)</li>
+        <li>Pauze lungi în postări (~3 luni de tăcere)</li>
+        <li>Medaliile nu sunt evidențiate nicăieri vizibil</li>
+        <li>Fără prezență pe LinkedIn (critic pentru B2B)</li>
+        <li>Fără conținut în limba engleză (limitează piețele)</li>
+        <li>Medaliile și premiile nu sunt prezentate strategic</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <h4>🎯 Observație cheie</h4>
+    <p style="margin-bottom:0;">Există un decalaj semnificativ între <strong>calitatea produsului</strong> (medaliată, echipament italian, soi autohton Viorica) și <strong>prezența digitală</strong>. Succesul real al Heredo nu este reflectat în online. Acesta este spațiul în care pot contribui cel mai mult.</p>
+  </div>
+
+  <div class="page-number">04</div>
+</div>
+
+<!-- ============== PAGE 4: AUDIT SOCIAL MEDIA ============== -->
+<div class="page">
+  <div class="section-num">03</div>
+  <div class="section-title">Auditul rețelelor sociale</div>
+  <div class="section-subtitle">Instagram & Facebook — Analiză detaliată</div>
+  <div class="divider"></div>
+
+  <h5>Instagram — @heredo.md</h5>
+
+  <img src="heredo_ig_profile.png" class="screenshot" alt="Heredo Instagram Profile">
+  <div class="img-caption">Captură de ecran — profilul Instagram Heredo (martie 2026)</div>
+
+  <table>
+    <tr><th>Metrică</th><th>Valoare</th><th>Observație</th></tr>
+    <tr><td>Urmăritori</td><td><strong>2.042</strong></td><td>Audiență reală, organică — nu cumpărată</td></tr>
+    <tr><td>Postări</td><td><strong>89</strong></td><td>~2 postări/lună pe 3+ ani — prea puțin</td></tr>
+    <tr><td>Rată de interacțiune</td><td><strong>~1.5-3%</strong></td><td>Medie — audiență implicată dar mică</td></tr>
+    <tr><td>Like-uri medii</td><td><strong>15-60</strong></td><td>Consistent, dar limitat de frecvența postării</td></tr>
+    <tr><td>Bio</td><td colspan="2">Winery/Vineyard · Since 2022 · Gustul moștenirii care inspiră generații</td></tr>
+    <tr><td>Link</td><td colspan="2">Direcționează către Facebook (ideal ar fi un website)</td></tr>
+  </table>
+
+  <h5 style="margin-top: 18px;">Teme de conținut identificate</h5>
+  <div class="two-col">
+    <div>
+      <ul>
+        <li><strong>Familie & moștenire</strong> — Cristina cu copiii, momente personale</li>
+        <li><strong>Sezonalitate</strong> — Crăciun, Anul Nou, recolta</li>
+        <li><strong>Produs în context</strong> — sticlele în setări atmosferice, niciodată „packshot" plat</li>
+      </ul>
+    </div>
+    <div>
+      <ul>
+        <li><strong>Educativ</strong> — seria „Gătește cuVIN" (vin + mâncare)</li>
+        <li><strong>Origini</strong> — procesul, podgoria, povestea familiei</li>
+        <li><strong>Highlight-uri</strong> — LOCAȚII, SELECȚIA, RECOLTA, ORIGINI, GĂTEȘTE cuVIN</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="page-number">05</div>
+</div>
+
+<!-- ============== PAGE 5: FACEBOOK + CONCLUZII ============== -->
+<div class="page">
+  <h5>Facebook — Heredo</h5>
+
+  <img src="heredo_fb_about.png" class="screenshot" alt="Heredo Facebook Page">
+  <div class="img-caption">Captură de ecran — pagina Facebook Heredo (martie 2026)</div>
+
+  <table>
+    <tr><th>Metrică</th><th>Valoare</th><th>Observație</th></tr>
+    <tr><td>Aprecieri</td><td><strong>575</strong></td><td>Foarte puțin pentru o vinărie din Moldova</td></tr>
+    <tr><td>Urmăritori</td><td><strong>575</strong></td><td>Creștere stagnantă</td></tr>
+    <tr><td>Recenzii</td><td><strong>2</strong></td><td>Insuficient pentru credibilitate</td></tr>
+    <tr><td>Cel mai bun post</td><td colspan="2">Video artistic (desen) — <strong>3.800 de vizualizări</strong></td></tr>
+  </table>
+
+  <div class="highlight-box" style="margin-top: 20px;">
+    <h4>📊 Descoperire critică: Video vs. Foto</h4>
+    <p>Un singur video artistic a obținut <strong>3.800 de vizualizări</strong> pe Facebook — în timp ce postările foto obțin în medie <strong>30-50 de interacțiuni</strong>. Aceasta este o diferență de <strong>70-100x</strong> în reach.</p>
+    <p style="margin-bottom:0;"><strong>Concluzia este clară:</strong> audiența Heredo vrea conținut video. Acesta este cel mai mare levier de creștere disponibil în acest moment.</p>
+  </div>
+
+  <h5 style="margin-top: 25px;">Platforme absente</h5>
+  <table>
+    <tr><th>Platformă</th><th>Status</th><th>Impact</th></tr>
+    <tr><td>Website propriu</td><td><span class="status red">Inexistent</span></td><td>Fără credibilitate B2B, fără punct central de prezentare</td></tr>
+    <tr><td>LinkedIn</td><td><span class="status red">Inexistent</span></td><td>Invizibil pentru importatori, restaurante, distribuitori</td></tr>
+    <tr><td>Google Maps</td><td><span class="status red">Inexistent</span></td><td>Vinăria este complet invizibilă pentru turiști și vizitatori</td></tr>
+    <tr><td>Vivino</td><td><span class="status orange">2 recenzii</span></td><td>Potențial internațional nevalorificat</td></tr>
+    <tr><td>Email profesional</td><td><span class="status red">Gmail generic</span></td><td>Nu inspiră profesionalism pentru B2B</td></tr>
+  </table>
+
+  <div class="page-number">06</div>
+</div>
+
+<!-- ============== PAGE 6: COMPETITORI ============== -->
+<div class="page">
+  <div class="section-num">04</div>
+  <div class="section-title">Contextul competitiv</div>
+  <div class="section-subtitle">Unde se află Heredo în peisajul vinurilor din Moldova</div>
+  <div class="divider"></div>
+
+  <p class="lead">Am analizat 7 vinării boutique din Moldova pentru a înțelege unde se poziționează Heredo. Rezultatele sunt relevante.</p>
+
+  <table>
+    <tr>
+      <th>Vinăria</th>
+      <th>Website</th>
+      <th>Segment</th>
+    </tr>
+    <tr>
+      <td><strong>Purcari</strong></td>
+      <td><span class="status green">purcari.wine</span></td>
+      <td>Lux tradițional</td>
+    </tr>
+    <tr>
+      <td><strong>Castel Mimi</strong></td>
+      <td><span class="status green">castelmimi.md</span></td>
+      <td>Turism + premium</td>
+    </tr>
+    <tr>
+      <td><strong>Château Vartely</strong></td>
+      <td><span class="status green">vartely.md</span></td>
+      <td>Premium familial</td>
+    </tr>
+    <tr>
+      <td><strong>ATU Winery</strong></td>
+      <td><span class="status green">atu.wine</span></td>
+      <td>Boutique urban</td>
+    </tr>
+    <tr>
+      <td><strong>Et Cetera</strong></td>
+      <td><span class="status green">etceterawinery.md</span></td>
+      <td>Premium nișă</td>
+    </tr>
+    <tr>
+      <td><strong>Gogu Winery</strong></td>
+      <td><span class="status green">gogu.wine</span></td>
+      <td>Artizanal</td>
+    </tr>
+    <tr>
+      <td style="background: rgba(196,162,101,0.1);"><strong>HEREDO</strong></td>
+      <td style="background: rgba(196,162,101,0.1);"><span class="status red">Nu există</span></td>
+      <td style="background: rgba(196,162,101,0.1);">Artizanal familial</td>
+    </tr>
+  </table>
+
+  <div class="highlight-box">
+    <h4>⚠️ Observație importantă</h4>
+    <p style="margin-bottom:0;">Heredo este <strong>singura vinărie boutique serioasă din Moldova fără website</strong>. Fiecare competitor — inclusiv vinării mai mici — are unul. Într-o piață unde exportul Moldovei a crescut cu 22% în 2024, lipsa unui website înseamnă pierderea sistematică de oportunități.</p>
+  </div>
+
+  <h5>Ce au competitorii și Heredo încă nu</h5>
+  <ul>
+    <li>Website profesional cu prezentarea detaliată a vinurilor</li>
+    <li>Conținut video cinematic (Purcari, Castel Mimi)</li>
+    <li>Sistem de clasificare a vinurilor pe niveluri (entry, signature, reserve)</li>
+    <li>Prezență LinkedIn activă pentru piața B2B</li>
+    <li>Tururi virtuale și experiențe online</li>
+  </ul>
+
+  <h5>Ce are Heredo și ceilalți nu</h5>
+  <ul>
+    <li><strong>Povestea cea mai autentică</strong> de fondator din toată piața — diaspora care se întoarce acasă</li>
+    <li><strong>Numele cel mai bun</strong> — „Heredo" este probabil cel mai memorabil nume de vinărie din Moldova</li>
+    <li><strong>Ambiția de lux</strong> — nicio altă vinărie moldovenească nu țintește explicit „Chanel-ul vinurilor"</li>
+    <li><strong>Spiritul de underdog</strong> — mică, ambițioasă, medaliată din prima zi</li>
+  </ul>
+
+  <div class="page-number">07</div>
+</div>
+
+<!-- ============== PAGE 7: PIATA ============== -->
+<div class="page">
+  <div class="section-num">05</div>
+  <div class="section-title">Piața vinului din Moldova</div>
+  <div class="section-subtitle">Context și oportunitate</div>
+  <div class="divider"></div>
+
+  <p class="lead">Republica Moldova trăiește un moment de aur în industria vinului. Heredo poate profita de această tendință — dar are nevoie de imaginea potrivită pentru a face asta.</p>
+
+  <div class="two-col">
+    <div class="col-card">
+      <h4>📈 Cifrele pieței (2024)</h4>
+      <ul>
+        <li>Valoare piață: <strong>$217 milioane</strong></li>
+        <li>Export: <strong>$234.7 milioane</strong> (+22% YoY)</li>
+        <li>Export SUA: creștere de <strong>949%</strong></li>
+        <li>~331 vinării active</li>
+        <li>90% din producție merge la export</li>
+        <li>Al 19-lea exportator mondial de vin</li>
+      </ul>
+    </div>
+    <div class="col-card">
+      <h4>🏅 Recunoaștere internațională</h4>
+      <ul>
+        <li>MUNDUS VINI 2026: <strong>119 medalii</strong> pentru Moldova</li>
+        <li>Decanter: 2 „Best in Show"</li>
+        <li>Bacchus 2024: 11 medalii</li>
+        <li>Concurs Național: 120 vinuri premiate</li>
+        <li>Creștere accelerată pe piețele europene</li>
+        <li>Africa: creștere de 69% ca piață nouă</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="quote" style="margin-top: 20px;">
+    Moldova este în curs de a deveni următoarea „descoperire" în lumea vinului. Heredo, cu povestea și calitatea sa, are tot ce trebuie pentru a fi în fruntea acestui val — dacă imaginea ține pasul cu produsul.
+  </div>
+
+  <h5>De ce contează pentru Heredo</h5>
+  <p>Piața crește. Exportul explodează. Vinurile moldovenești câștigă medalii la nivel mondial. Dar într-o piață cu peste 300 de producători, <strong>diferențierea prin imagine</strong> devine critică. Calitatea vinului nu mai este suficientă — trebuie ca și povestea vizuală să fie la cel mai înalt nivel.</p>
+
+  <p>Vinăriile care investesc în imagine acum vor fi cele care captează piețele noi. Cele care nu o fac, vor rămâne invizibile — indiferent de cât de bun este vinul lor.</p>
+
+  <div class="page-number">08</div>
+</div>
+
+<!-- ============== PAGE 8: CE OFER ============== -->
+<div class="page">
+  <div class="section-num">06</div>
+  <div class="section-title">Ce pot oferi pentru Heredo</div>
+  <div class="section-subtitle">Servicii concrete, adaptate nevoilor identificate</div>
+  <div class="divider"></div>
+
+  <p class="lead">Pe baza analizei de mai sus, am identificat exact unde pot aduce valoare brandului Heredo. Mai jos, fiecare serviciu este descris în detaliu.</p>
+
+  <div class="service-card">
+    <div class="service-tag">Prioritate maximă</div>
+    <h3>🌐 Website de prezentare premium</h3>
+    <p>Un website elegant, modern, care reflectă poziționarea de lux a Heredo. Secțiuni dedicate pentru fiecare vin, povestea familiei, procesul de producție, și o pagină specială pentru parteneri B2B (importatori, restaurante). Design responsive — frumos pe telefon, tabletă și desktop.</p>
+    <ul>
+      <li>Pagină principală cu <strong>video cinematic de fundal care derulează odată cu scroll-ul</strong> — în stilul site-urilor de lux precum Dom Pérignon, unde vizualul însoțește narațiunea pe toată pagina</li>
+      <li>Catalog vinuri cu note de degustare</li>
+      <li>Secțiunea „Povestea" — familie, podgorie, premii</li>
+      <li>Pagină B2B pentru parteneri comerciali</li>
+      <li>Formular de contact profesional</li>
+      <li>Bilingv: Română + Engleză</li>
+    </ul>
+  </div>
+
+  <div class="service-card">
+    <div class="service-tag">Impact vizual maxim</div>
+    <h3>🎬 Video ad de brand</h3>
+    <p>Un clip scurt (15–30 secunde) care captează esența Heredo într-un format concentrat și puternic — de la podgorie la pahar. Realizat folosind cele mai noi tehnologii de generare video, combinat cu materialele existente. Conceptul: eleganță, natură, procesul artizanal — fără dialog, doar emoție pură.</p>
+    <ul>
+      <li>Concept narativ original, aliniat cu viziunea dumneavoastră</li>
+      <li>Optimizat pentru Instagram Reels, Facebook, și website</li>
+      <li>Format scurt, de impact — perfect pentru social media și campaniile de brand</li>
+    </ul>
+  </div>
+
+  <div class="service-card">
+    <div class="service-tag">Lansarea celor 4 vinuri noi</div>
+    <h3>🍷 Videoclipuri de produs</h3>
+    <p>Câte un video scurt, elegant, pentru fiecare vin nou — perfect pentru anunțul de lansare pe social media. Fiecare video va reflecta personalitatea vinului respectiv.</p>
+  </div>
+
+  <div class="page-number">09</div>
+</div>
+
+<!-- ============== PAGE 9: SERVICII CONTINUARE ============== -->
+<div class="page">
+
+
+  <div class="service-card">
+    <div class="service-tag">Creștere digitală</div>
+    <h3>📱 Strategie de conținut social media</h3>
+    <p>Un plan de conținut pe 30 de zile, cu teme, frecvență de postare, tipuri de conținut (foto, video, stories, reels), și recomandări de hashtag-uri. Include template-uri vizuale pe care le puteți folosi pe cont propriu.</p>
+  </div>
+
+  <div class="service-card">
+    <div class="service-tag">Credibilitate profesională</div>
+    <h3>✉️ Identitate digitală completă</h3>
+    <p>Configurarea email-ului profesional (@heredo.md) și crearea paginii Google Maps a vinăriei — cu fotografii de la locație, informații de contact și direcții. Pe LinkedIn, vă recomand să vă creați dumneavoastră profilul și pagina companiei: vocea și povestea fondatoarei sunt cel mai puternic semnal de încredere pentru parteneri B2B; pot oferi, la nevoie, un scurt ghid de structură și puncte de bifat, fără să preiau contul.</p>
+  </div>
+
+  <h5 style="margin-top: 30px;">Cum Funcționează Colaborarea</h5>
+
+  <div class="flow-steps">
+    <div class="flow-step">
+      <div class="step-num">01</div>
+      <div class="step-label">Demo Website & Video</div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">02</div>
+      <div class="step-label">Feedback & Ajustări</div>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">03</div>
+      <div class="step-label">Livrare Finală</div>
+    </div>
+  </div>
+
+  <p style="margin-top: 15px;">Am discutat deja și ne-am aliniat pe direcție. Următorul pas din partea mea este să vin cu un <strong>demo de website</strong> și un <strong>demo de video ad</strong> — să vedeți concret cum ar arăta viziunea pusă în practică. Fiecare decizie creativă rămâne la dumneavoastră.</p>
+
+  <div class="highlight-box" style="margin-top: 25px;">
+    <h4>💬 Ce urmează</h4>
+    <p style="margin-bottom:0;">Lucrez la cele două demo-uri — website-ul de prezentare și video ad-ul de brand. Odată ce le vedeți, discutăm ce vă place, ce ajustăm, și mergem mai departe spre versiunea finală. Tarifele le stabilim personal.</p>
+  </div>
+
+  <div class="page-number">10</div>
+</div>
+
+<!-- ============== FINAL PAGE ============== -->
+<div class="cover" style="min-height:100vh; justify-content: center;">
+  <div class="cover-line thick"></div>
+  <div style="margin-top: 25px;">
+    <div class="cover-title" style="font-size: 30pt;">HEREDO</div>
+    <div class="cover-tagline" style="font-size: 12pt;">Gustul moștenirii care inspiră generații</div>
+  </div>
+  <div class="cover-line" style="margin-top: 10px;"></div>
+  <div class="cover-desc" style="margin-top: 30px; font-size: 10pt; color: rgba(245,240,232,0.7);">
+    Mulțumesc pentru timpul acordat acestui document.<br>
+    Aștept cu interes discuția noastră.<br><br>
+    <span style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13pt; color: var(--gold-light);">Riccardo</span>
+  </div>
+  <div class="cover-footer">
+    Document confidențial · Martie 2026<br>
+    <span style="font-size: 7pt; letter-spacing: 1px; opacity: 0.6;">Toate datele și analizele sunt bazate pe cercetare proprie din surse publice.</span>
+  </div>
+</div>
+
+</body>
+</html>
